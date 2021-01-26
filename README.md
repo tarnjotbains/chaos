@@ -1,5 +1,10 @@
 # chaos
 
+Please note that this project makes use of Audio Context which is not available on some older web-browsers.
+It is available on chrome however.
+I am working on an implementation that functions on all web browsers. 
+
+In the meantime... 
 ### Click the link below to see a demo 
 https://tarnjotbains.github.io/chaos/
 
