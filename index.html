@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chaos</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css"> 
+    <link href="styles.css" rel="stylesheet" > 
 </head>
-<body>
+<body class="bg-black">
 
     <div class="fixed inset-0 flex items-center justify-center" id = "modalEl">
         <div class="bg-white max-w-md w-full p-6 text-center"> 
@@ -17,6 +17,14 @@
             </div>
         </div>
     </div> 
+
+    <div class="fixed flex inset-x-0 bottom-0 justify-center" id= "pauseBtn">
+        <button type="button"><img src="pause.png"></button>
+    </div>
+
+    <div class="fixed flex inset-x-0 bottom-0 justify-center" id= "playBtn">
+        <button type="button"><img src="play.png"></button>
+    </div>
 
     <canvas></canvas>
     <audio src="fur-elise.mp3"></audio>
