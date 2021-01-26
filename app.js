@@ -14,6 +14,13 @@ const c = canvas.getContext('2d')
 const modalEl = document.querySelector('#modalEl') 
 const audioCtx = new AudioContext() 
 
+const pauseBtn = document.querySelector('#pauseBtn')
+pauseBtn.style.display = 'none' 
+
+const playBtn = document.querySelector('#playBtn') 
+playBtn.style.display = 'none'
+
+
 // create an audio source 
 const audioSource = audioCtx.createMediaElementSource(audio) 
 
@@ -95,7 +102,7 @@ class Point{
         c.fill()
 
         // Remove old trails 
-        if (this.trail.length > 200){
+        if (this.trail.length > 400){
             this.trail.splice(0,5) 
         }
 
@@ -106,13 +113,41 @@ class Point{
             c.fillStyle= `hsl(${this.color}, 50%, 50%)`
             c.fill()
 
-            if (index -1 > 0){
+            if (index -5 > 0){
+            c.beginPath()
+            c.moveTo(this.trail[index - 5].x, this.trail[index-5].y)
+            c.lineTo(point.x, point.y)
+            c.strokeStyle = `hsl(${this.color}, 50%, 50%)`
+            c.lineWidth = 0.25;
+            c.stroke() 
+
             c.beginPath()
             c.moveTo(this.trail[index - 1].x, this.trail[index-1].y)
             c.lineTo(point.x, point.y)
-            c.strokeStyle = `hsl(${this.color}, 50%, 50%)`
+            c.strokeStyle = `hsl(${this.color}, 80%, 80%)`
             c.lineWidth = 0.1;
-            c.stroke() 
+            c.stroke()
+
+            c.beginPath()
+            c.moveTo(this.trail[index - 2].x, this.trail[index-2].y)
+            c.lineTo(point.x, point.y)
+            c.strokeStyle = `hsl(${this.color}, 60%, 50%)`
+            c.lineWidth = 0.1;
+            c.stroke()
+
+            c.beginPath()
+            c.moveTo(this.trail[index - 3].x, this.trail[index-3].y)
+            c.lineTo(point.x, point.y)
+            c.strokeStyle = `hsl(${this.color}, 30%, 30%)`
+            c.lineWidth = 0.1;
+            c.stroke()
+
+            c.beginPath()
+            c.moveTo(this.trail[index - 4].x, this.trail[index-4].y)
+            c.lineTo(point.x, point.y)
+            c.strokeStyle = `hsl(${this.color}, 10%, 10%)`
+            c.lineWidth = 0.1;
+            c.stroke()
             }
         })
 
@@ -152,7 +187,10 @@ function animate(){
         c.scale(4,4)
         first = false 
     }
+
+    
     requestAnimationFrame(animate) 
+    
     
     // Generate a list of frequency values
     analyzer.getByteFrequencyData(frequencyData) 
@@ -166,7 +204,7 @@ function animate(){
     dt = dt / 1024
 
     // Set Logistic constants 
-    const L = 0.01
+    const L = 0.008
     const k = 0.8
     const x0 = 12
 
@@ -182,9 +220,26 @@ function animate(){
 // Start animation iff user clicks an event. 
 startAudioBtn.addEventListener('click', ()=> { 
     animate()
+    pauseBtn.style.display = 'flex'
     modalEl.style.display = 'none'
     audioCtx.resume() 
     audio.play()
+})
+
+pauseBtn.addEventListener('click', () => {
+    if (!audio.paused){
+        audio.pause() 
+        playBtn.style.display = 'flex'
+        pauseBtn.style.display = 'none'
+    }
+} )
+
+playBtn.addEventListener('click', () => {
+    if (audio.paused){
+        audio.play()
+        playBtn.style.display = 'none' 
+        pauseBtn.style.display = 'flex' 
+    }
 })
 
 
