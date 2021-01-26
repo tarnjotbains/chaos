@@ -102,7 +102,7 @@ class Point{
         c.fill()
 
         // Remove old trails 
-        if (this.trail.length > 400){
+        if (this.trail.length > 200){
             this.trail.splice(0,5) 
         }
 
