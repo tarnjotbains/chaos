@@ -1,5 +1,15 @@
-body {
-    margin: 0;
-    background: black; 
+#pauseBtn {
+    opacity: 0.1;
+}
 
-};
+#playBtn {
+    opacity: 0.1;
+}
+
+#pauseBtn:hover {
+    opacity: 0.5;
+}
+
+#playBtn:hover {
+    opacity: 0.5;
+}
